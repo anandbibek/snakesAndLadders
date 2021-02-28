@@ -1,0 +1,50 @@
+package com.anandbibek.snakesandladders;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import com.anandbibek.snakesandladders.api.Dice;
+import com.anandbibek.snakesandladders.api.GameInterface;
+import com.anandbibek.snakesandladders.game.GameImpl;
+import com.anandbibek.snakesandladders.game.StandardDice;
+import com.anandbibek.snakesandladders.model.Board;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+class GameplayTest {
+
+  Board board;
+  GameInterface game;
+
+  @BeforeEach
+  public void setup() {
+
+    Dice dice = new MockDice();
+    board = new Board(100);
+    game = new GameImpl(board, dice);
+  }
+
+  @Test
+  void gameStart() {
+    game.nextTurn();
+    assertEquals(5, board.getPlayerPosition(), "Player should be at 5 after first turn");
+
+  }
+
+  @Test
+  void gameEnd() {
+    int count = 1;
+    while (!game.nextTurn()) {
+      count++;
+    }
+    assertEquals(20, count, "Game should be finished in 20 turns");
+
+  }
+
+  private static class MockDice extends StandardDice {
+
+    @Override
+    public int roll() {
+      return 5;
+    }
+  }
+}

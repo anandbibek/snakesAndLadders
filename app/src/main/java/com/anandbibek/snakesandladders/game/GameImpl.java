@@ -12,11 +12,13 @@ public class GameImpl implements GameInterface {
   private final Board board;
   private final Dice dice;
 
-  public GameImpl(int boardLength) {
-    board = new Board(boardLength);
-    dice = new StandardDice();
-    board.setPlayerPosition(0);
-    board.setSnakes(new ArrayList<>());
+  public GameImpl(Board board, Dice dice) {
+    this.board = board;
+    this.dice = dice;
+    this.board.setPlayerPosition(0);
+
+    //TODO reptiles aren't out yet
+    this.board.setSnakes(new ArrayList<>());
   }
 
   @Override
