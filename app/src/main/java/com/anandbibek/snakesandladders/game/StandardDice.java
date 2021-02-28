@@ -5,7 +5,7 @@ import java.util.Random;
 
 public class StandardDice implements Dice {
 
-  private final Random random = new Random();
+  protected final Random random = new Random();
 
   /**
    * Roll for a six-faced standard mortal dice
